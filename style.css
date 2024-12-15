@@ -23,9 +23,7 @@ body {
   height: 130px;
 }
 
-.active {
-  box-shadow: 90px;
-}
+
 
 p {
   font-size: 1.2em;

@@ -15,7 +15,6 @@ let gameOver = false;
 // Function to reset all images to neutral
 function resetAllImages() {
   images.forEach(image => {
-    image.element.classList.remove('active');
     image.element.src = "images/neutral.png";
   });
   currentImage = null;
@@ -36,7 +35,6 @@ function highlightRandomImage() {
   setTimeout(() => {
     const randomIndex = Math.floor(Math.random() * images.length);
     currentImage = images[randomIndex];
-    currentImage.element.classList.add('active'); // Add active state
     currentImage.element.src = "images/active.png"; // Change to active image
 
     // Set a timeout to automatically reset the image after a delay
