@@ -13,13 +13,13 @@ let score = 0;
 function highlightRandomImage() {
   if (currentImage) {
     currentImage.element.classList.remove('active'); // Remove active state
-    currentImage.element.src = "neutral.png"; // Reset to neutral image
+    currentImage.element.src = "images/neutral.png"; // Reset to neutral image
   }
 
   const randomIndex = Math.floor(Math.random() * images.length);
   currentImage = images[randomIndex];
   currentImage.element.classList.add('active'); // Add active state
-  currentImage.element.src = "active.png"; // Change to active image
+  currentImage.element.src = "images/active.png"; // Change to active image
 }
 
 // Keydown event listener
