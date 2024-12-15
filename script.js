@@ -1,30 +1,40 @@
-const symbols = ['A','S','D','F','J','K','L']; 
-let currentSymbol = '';
+const images = [
+  { key: 'A', element: document.getElementById('img1') },
+  { key: 'S', element: document.getElementById('img2') },
+  { key: 'D', element: document.getElementById('img3') },
+  { key: 'F', element: document.getElementById('img4') },
+  { key: 'G', element: document.getElementById('img5') },
+];
+
+let currentImage = null;
 let score = 0;
 
-// Funkce pro zobrazení nového náhodného symbolu
-function showNewSymbol() {
-  const randomIndex = Math.floor(Math.random() * symbols.length);
-  currentSymbol = symbols[randomIndex];
-  document.getElementById('current-symbol').textContent = currentSymbol;
-  document.getElementById('message').textContent = '';
+// Function to highlight a random image
+function highlightRandomImage() {
+  if (currentImage) {
+    currentImage.element.classList.remove('active'); // Remove active state
+    currentImage.element.src = "neutral.png"; // Reset to neutral image
+  }
+
+  const randomIndex = Math.floor(Math.random() * images.length);
+  currentImage = images[randomIndex];
+  currentImage.element.classList.add('active'); // Add active state
+  currentImage.element.src = "active.png"; // Change to active image
 }
 
-// Obsluha stisku klávesy
-document.addEventListener('keydown', (e) => {
-  const pressedKey = e.key.toUpperCase();
-  if (pressedKey === currentSymbol) {
+// Keydown event listener
+document.addEventListener('keydown', (event) => {
+  if (!currentImage) return;
+
+  if (event.key.toUpperCase() === currentImage.key) {
     score++;
-    document.getElementById('message').textContent = 'Správně!';
-    document.getElementById('message').style.color = 'green';
   } else {
     score--;
-    document.getElementById('message').textContent = 'Špatně!';
-    document.getElementById('message').style.color = 'red';
   }
+
   document.getElementById('score').textContent = score;
-  showNewSymbol();
+  highlightRandomImage();
 });
 
-// První symbol při startu
-showNewSymbol();
+// Start the game
+highlightRandomImage();
