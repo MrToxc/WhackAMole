@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  #current-symbol {
+    font-size: 5em;
+    margin: 20px;
+  }
+  
+  #score {
+    font-size: 2em;
+  }
+  
+  #message {
+    color: green;
+    font-size: 1.5em;
+    margin-top: 10px;
+    height: 30px;
+  }
+  
