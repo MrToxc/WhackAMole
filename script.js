@@ -32,6 +32,8 @@ function highlightRandomImage() {
 
     // Set a timeout to automatically reset the image after a delay
     timeoutId = setTimeout(() => {
+      score--;
+      document.getElementById('score').textContent = score;
       resetAllImages();
       highlightRandomImage(); // Automatically show a new active image
     }, 2000);
