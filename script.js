@@ -10,6 +10,7 @@ let currentImage = null;
 let score = 0;
 let timeoutId = null;
 let isKeyDisabled = false; // Prevents multiple keypresses during transition
+let gameOver = false;
 
 // Function to reset all images to neutral
 function resetAllImages() {
@@ -22,6 +23,14 @@ function resetAllImages() {
 
 // Function to highlight a random image after a short delay
 function highlightRandomImage() {
+  if(!gameOver) {
+  if (score > 9) {
+    victory();
+  }
+  else if (score < -9) {
+    defeat();
+  }
+  else {
   resetAllImages(); // Reset all images to neutral first
 
   setTimeout(() => {
@@ -34,11 +43,32 @@ function highlightRandomImage() {
     timeoutId = setTimeout(() => {
       score--;
       document.getElementById('score').textContent = score;
+      if(!gameOver) {
       resetAllImages();
       highlightRandomImage(); // Automatically show a new active image
+      }
     }, 2000);
   }, 500); // Short delay before highlighting the next image
 }
+}}
+
+function victory() {
+  resetAllImages();
+  document.getElementById('scoreComplete').textContent = "Victory";
+  document.body.style.backgroundColor = "green";
+  gameOver = true;
+}
+
+function defeat() {
+  isKeyDisabled = true;
+  images.forEach(image => {
+    image.element.src = "images/active.png";
+  });
+  document.getElementById('scoreComplete').textContent = "Defeat";
+  document.body.style.backgroundColor = "darkred";
+  gameOver = true;
+}
+
 
 // Keydown event listener
 document.addEventListener('keydown', (event) => {
@@ -59,8 +89,10 @@ document.addEventListener('keydown', (event) => {
     }, 500); // Display hit.png for 500ms
   } else {
     score--;
+    if (score < -9) {
+      defeat();
+    }
   }
-
   document.getElementById('score').textContent = score;
 });
 
